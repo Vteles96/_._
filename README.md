@@ -1,2 +1,1 @@
-# W_shop
-web_shop
+Proyecto de pagina web simple
