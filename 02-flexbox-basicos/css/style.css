@@ -66,3 +66,73 @@ h1, h2 {
     background-color: var(--blanco);
     padding: 5rem;
 }
+
+
+
+/* 
+DISPLAY FLEX
+FLEX DIRECTION: ROW | ROW-REVERSE | COLUMN | COLUMN-REVERSE
+JUSTIFY-CONTENT: FLEX-START | FLEX-END | CENTER | SPACE-BETWEEN | SPACE-AROUND | SPACE-EVENLY
+
+ALIGN-ITEMS: STRETCH | FLEX-START | FLEX-END | CENTER | BASELINE
+ALIGN-CONTENT: STRETCH | FLEX-START | FLEX-END | CENTER | SPACE-BETWEEN | SPACE-AROUND
+
+*/
+
+/* 1 */
+
+.d-flex {
+    display: flex;
+}
+
+/* 2 */
+
+.d-flex-2 {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3 */
+
+.d-flex-3 {
+    display: flex;
+    justify-content: space-around
+}
+
+/* 4 */
+
+.d-flex-4 {
+    display: flex;
+    flex-direction: column;
+    height: 100rem;
+    justify-content: space-between  ;
+}
+
+/* 5 */
+
+.d-flex-5 {
+    display: flex;
+    height: 70rem;
+    justify-content: end;
+    align-items: center;
+}
+
+/* 6 */
+
+.d-flex-6 { 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100rem;
+}
+
+/* 7 */
+.d-flex-7 {
+    display: flex;
+    height: 80rem;
+    /* valores por defecto */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
