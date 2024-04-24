@@ -66,6 +66,8 @@ img {
     text-align: center;
     border: none;
     width: 100%;
+    text-align: center;
+    border: none;
 }
 .btn:hover {
     background-color: #769c02;
@@ -347,5 +349,112 @@ img {
 
 .informacion-texto p{
     font-weight: 500;
+}
+
+
+.contenedor-blog{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 4rem;
+}
+
+.entrada{
+    border-bottom: 0.2rem solid #e1e1e1;
+    padding-bottom: 4rem;
+    margin-bottom: 2rem;
+} 
+
+.entrada:last-of-type{
+    border: none;
+}
+
+.entrada-meta{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.entrada-meta p{
+    font-weight: 700;
+}
+
+.entrada-meta span{
+    color: #037bc0;
+}
+
+.bottom-center{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.bottom-center .btn{
+    width: 50%;
+}
+
+.contenido-entrada-blog{
+    width: 60rem;
+    margin: 0 auto;
+}
+
+/* Galeria */
+
+.galeria{
+    list-style: none;
+    padding: 0%;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+}
+
+.galeria img{
+    height: 40rem;
+    width: 40rem;
+    object-fit: cover;
+}
+
+/* Formulario */
+
+.formulario{
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.formulario fieldset{
+    border: 2px solid #000000;
+    margin-bottom: 2rem;
+
+}
+
+.formulario legend{
+    background-color: #037bc0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-weight: 900;
+    padding: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.campo{
+    display: flex;
+    margin-bottom: 2rem;
+
+}
+
+.campo label{
+    flex-basis: 10rem;
+}
+
+
+.campo input:not([type="radio"]),
+.campo textarea,
+.campo select{
+    border: 1px solid #e1e1e1;
+    flex: 1;
+    padding: 1rem;
 }
 
