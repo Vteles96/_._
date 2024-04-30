@@ -1,0 +1,13 @@
+
+/* EMPIEZA CON EL ATRIBUTO HTTP */
+a[href^="http"]{
+    color: red;
+}
+
+/* TERMINA CON EL ATRIBUTO .COM */
+a[href$=".com"]{
+    color: rgb(198, 217, 72);
+}
+
+input[type="tel"]{
+    border: 1px solid red;}
