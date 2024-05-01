@@ -1,0 +1,15 @@
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* NUNCA CRECE MAS DE SU TAMAÑO NATURAL PERO
+SI SE PUEDE HACER MAS PEQUEÑA */
+
+p {
+    background-color: red;
+    margin: 0;
+
+}
+
