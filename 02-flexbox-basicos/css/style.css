@@ -97,6 +97,7 @@ ALIGN-CONTENT: STRETCH | FLEX-START | FLEX-END | CENTER | SPACE-BETWEEN | SPACE-
 .d-flex-3 {
     display: flex;
     justify-content: space-around
+     
 }
 
 /* 4 */
