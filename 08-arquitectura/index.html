@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Guardar la posición de desplazamiento antes de recargar
+        window.addEventListener('beforeunload', function() {
+          sessionStorage.setItem('scrollPosition', window.scrollY);
+        });
+      
+        // Restaurar la posición de desplazamiento después de recargar
+        window.addEventListener('load', function() {
+          if (sessionStorage.getItem('scrollPosition')) {
+            window.scrollTo(0, sessionStorage.getItem('scrollPosition'));
+          }
+        });
+      </script>
+    
+</head>
+<body>
+    <header class="header">
+        <div class="contenedor contenido-header">
+           <div class="barra">
+
+                <div class="logo">
+                    <h1 class="nombre-sitio">Arquitectura<span>Bosque</span></h1>
+                </div>
+
+                <div class="contacto">
+                    <a class= "telefono" href="tel:01-800-0000-000"> 01-800-0000-000 </a>
+
+                    <nav class="navegacion">
+                        <a class="link" href="#">Inicio</a>
+                        <a class="link" href="#">Nosotros</a>
+                        <a class="link" href="#">Modelos</a>
+                        <a class="link" href="#">Galeria</a>
+                        <a class="link" href="#">Contacto</a>
+                    </nav>
+                </div>
+
+                
+           </div>
+
+            <div class="slogan">
+                <h1>Tu casa en el BOSQUE</h1>
+                <p>Construimos la casa de tus SUEÑOS</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="nosotros contenedor mt-5">
+        <div class="contenido-nosotros">
+            <h2> Sobre Nosotros</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aperiam molestiae quasi illum dolorem in harum dicta voluptatum autem id voluptates expedita dolores cupiditate nulla, voluptate natus unde. Harum, perferendis.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias quod, repellendus iusto veritatis commodi magnam, blanditiis, nesciunt molestiae ipsam dignissimos obcaecati officiis? Iure placeat nulla eos fugiat aut at iste.</p>
+        </div>
+    </section>
+
+    <main class="contenedor mt-10">
+        <h2>Conoce Nuestros 3 Modelos</h2>
+        <div class="modelo basico">
+            <div class="contenido-modelo">
+                <h3>Modelo Basico</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aperiam molestiae quasi illum dolorem in harum dicta voluptatum autem id voluptates expedita dolores cupiditate nulla, voluptate natus unde. Harum, perferendis.</p>
+                <a class="btn" href="#">Mas informacion</a>
+            </div>
+        </div> <!--.modelo-->
+
+        <div class="modelo premier">
+            <div class="contenido-modelo">
+                <h3>Modelo Premier</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aperiam molestiae quasi illum dolorem in harum dicta voluptatum autem id voluptates expedita dolores cupiditate nulla, voluptate natus unde. Harum, perferendis.</p>
+                <a class="btn" href="#">Mas informacion</a>
+            </div>
+        </div> <!--.modelo-->
+
+        <div class="modelo elite">
+            <div class="contenido-modelo">
+                <h3>Modelo Elite</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aperiam molestiae quasi illum dolorem in harum dicta voluptatum autem id voluptates expedita dolores cupiditate nulla, voluptate natus unde. Harum, perferendis.</p>
+                <a class="btn" href="#">Mas informacion</a>
+            </div>
+        </div> <!--.modelo-->
+
+
+    </main>
+</body>
+</html>
