@@ -9,8 +9,11 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "gulp": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-avif": "^1.1.1",
+    "gulp-imagemin": "^7.1.0",
     "gulp-sass": "^5.1.0",
+    "gulp-webp": "^4.0.1",
     "postcss": "^8.4.39",
     "sass": "^1.77.7"
   },

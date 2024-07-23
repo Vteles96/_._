@@ -365,3 +365,45 @@ h3 {
 .bg-primario {
   background-color: #E8505B;
 }
+
+.header {
+  padding: 5rem 0;
+  position: relative;
+}
+@media (max-width: 480px) {
+  .header {
+    padding: 4rem;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    padding: 3rem;
+  }
+}
+@media (max-width: 1024px) {
+  .header {
+    padding: 2rem;
+  }
+}
+.header::before {
+  content: "";
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.5;
+}
+.header .contenido-header {
+  margin-top: 5rem;
+  position: relative;
+}
+
+.header-inicio {
+  background-image: url("../img/header_inicio.jpg");
+}
+
+.nav {
+  color: black;
+}
