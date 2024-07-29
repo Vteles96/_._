@@ -1,4 +1,43 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
 
-.nav{
-    color: black;
+.nav-principal{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    margin-top: 5rem;
+
+    @include m.tablet{
+        flex-direction: row;
+        padding: 0;
+        margin-top: 0
+        ;
+    }
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: v.$blanco;
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+
+        @include m.tablet{
+             margin-bottom: 0;
+            
+         }
+
+        &:hover{
+            color: v.$color_secundario;
+        }    
+
+        &.activo{
+            color: v.$color_secundario;
+        }
+    
+    }
+
 }
