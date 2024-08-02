@@ -1,0 +1,15 @@
+@use 'variables' as v; 
+
+// Utilidades
+
+// https//:GETWAVES.IO (imagenes de vector)
+
+
+.text-center {
+    text-align: center;
+}
+
+.bg-primario {
+    background-color: v.$primario;
+}
+
