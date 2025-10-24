@@ -1,0 +1,6 @@
+[build]
+  publish = "."     # publica desde la carpeta raíz (donde está tu index.html)
+  command = ""      # sin build, es un sitio estático
+
+[functions]
+  directory = "netlify/functions"   # aquí vive airtable.js

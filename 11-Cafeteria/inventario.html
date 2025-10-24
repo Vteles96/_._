@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inventario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Usa tu CSS ya compilado -->
+  <link rel="stylesheet" href="build/css/app.css" />
+  <style>
+    /* Pequeños estilos locales (no modifican tu app.css) */
+    .inventario-wrap { background:#fff; padding:2rem; margin: 5rem auto; max-width:120rem; width:95%; }
+    .inventario-toolbar { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; }
+    .inventario-toolbar input, .inventario-toolbar select, .inventario-toolbar button {
+      border:.3rem solid #5e311e; padding:.8rem 1rem; font-size:1.6rem;
+    }
+    .inventario-table { width:100%; border-collapse:collapse; background:#fff; }
+    .inventario-table th, .inventario-table td { border-bottom:1px solid #ddd; padding:1rem; text-align:left; }
+    .inventario-table th { cursor:pointer; user-select:none; }
+    .badge { display:inline-block; padding:.2rem .6rem; border-radius:.6rem; background:#ebe7de; }
+  </style>
+</head>
+<body class="bg-white">
+
+  <!-- HEADER: mismo look que tu sitio; reutilizo la clase de cabecera -->
+  <header class="header header-menu">
+    <div class="contenido-header contenedor">
+      <div class="barra">
+        <div class="logo">
+          <a href="index.html"><img src="build/img/logo.svg" alt="Logo" /></a>
+        </div>
+        <nav class="nav-principal">
+          <a href="index.html">Inicio</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="proceso.html">Proceso</a>
+          <a href="menu.html">Menú</a>
+          <a href="galeria.html">Galeria</a>
+          <a href="contacto.html">Contacto</a>
+          <a class="activo" href="inventario.html">Inventario</a>
+        </nav>
+      </div>
+      <div class="texto-header">
+        <h1>Inventario</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor contenido-principal">
+    <section class="inventario-wrap">
+      <div class="inventario-toolbar">
+        <input id="q" type="search" placeholder="Buscar por nombre..." />
+        <select id="tipo">
+          <option value="">Todos los tipos</option>
+          <option value="bultos">Bultos</option>
+          <option value="sacos">Sacos</option>
+          <option value="unidades">Unidades</option>
+        </select>
+        <button id="btnReload" type="button">Recargar</button>
+        <span id="total" class="badge">0 ítems</span>
+      </div>
+
+      <div class="table-scroll">
+        <table class="inventario-table" id="tabla">
+          <thead>
+            <tr>
+              <th data-sort="Nombre">Nombre ▾</th>
+              <th data-sort="TipoCantidad">Tipo</th>
+              <th data-sort="Cantidad">Cantidad</th>
+              <th data-sort="Categoria">Categoría</th>
+              <th data-sort="Actualizado">Actualizado</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <!-- filas dinámicas -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="copyright">Todos los derechos reservados. La Cafeteria</p>
+  </footer>
+
+  <!-- Carga el JS de esta página -->
+  <script src="js/inventario.js" type="module"></script>
+</body>
+</html>
