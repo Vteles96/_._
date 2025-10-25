@@ -1,7 +1,7 @@
 // ===== Inventario: carga desde Netlify Function + Airtable =====
 
 // Ajusta si tu tabla/vista en Airtable tienen otros nombres:
-const TABLE = "Inventario";   // <-- pon aquí el nombre exacto de tu tabla
+const TABLE = "tblKLu27fgxF3QCBo";   // <-- pon aquí el nombre exacto de tu tabla
 const VIEW  = "Grid view";    // <-- o la vista que uses
 
 const state = {
