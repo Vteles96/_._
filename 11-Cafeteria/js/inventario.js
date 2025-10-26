@@ -60,12 +60,13 @@ async function loadData() {
       const f = r.fields || {};
       return {
         id: r.id,
-        // 👇 AJUSTA estos nombres si tus columnas se llaman distinto en Airtable
-        Nombre: f.Nombre || f.Producto || f.name || "",
+        Nombre: f.Producto || f.Nombre || "", // Producto = Nombre
+        Marca: f.Marca || "",
         TipoCantidad: f.TipoCantidad || f.Tipo || "",
         Cantidad: typeof f.Cantidad === "number" ? f.Cantidad : Number(f.Cantidad ?? f.Quantidade) || 0,
+        Unidad: f.Unidad || "",
         Categoria: f.Categoria || "",
-        Actualizado: f.Actualizado || r.createdTime || ""
+        Actualizado: f.UltimaActualizacion || f.Actualizado || r.createdTime || ""
       };
     });
 
@@ -102,8 +103,10 @@ function render() {
   tbody.innerHTML = filtered.map(row => `
     <tr>
       <td>${escapeHtml(row.Nombre)}</td>
+      <td>${escapeHtml(row.Marca)}</td>
       <td>${escapeHtml(row.TipoCantidad)}</td>
       <td>${row.Cantidad}</td>
+      <td>${escapeHtml(row.Unidad)}</td>
       <td>${escapeHtml(row.Categoria)}</td>
       <td>${formatDate(row.Actualizado)}</td>
     </tr>
