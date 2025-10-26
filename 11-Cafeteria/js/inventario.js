@@ -29,8 +29,51 @@ const kpiZero  = document.getElementById("kpiZero");
 const listZero = document.getElementById("listZero");
 const listLow  = document.getElementById("listLow");
 const overlay = document.getElementById("overlayInventario");
+const overlayButtons = document.getElementById("overlayButtons");
+const overlayClose   = document.getElementById("overlayClose");
 
+function openOverlay() {
+  overlay.classList.remove("hidden");
+  overlay.setAttribute("aria-hidden", "false");
+}
+function closeOverlay() {
+  overlay.classList.add("hidden");
+  overlay.setAttribute("aria-hidden", "true");
+}
+function buildOverlay() {
+  if (!overlayButtons) return;
+  overlayButtons.innerHTML = "";
 
+  // botón para tu inventario actual (Miminho)
+  const btn = document.createElement("button");
+  btn.className = "overlay-btn";
+  btn.textContent = "🍰 Cocina - Miminho";
+  btn.dataset.view = "Grid view Normalizada";
+  overlayButtons.appendChild(btn);
+}
+function selectView(view) {
+  const v = view || "Grid view Normalizada";
+  localStorage.setItem("inventoryView", v);
+  VIEW = v;           // usa tu variable global de vista
+  closeOverlay();
+  loadData();
+}
+
+function wireOverlay() {
+  // botones con data-view dentro del overlay
+  overlay.querySelectorAll(".overlay-btn").forEach(b => {
+    const v = b.getAttribute("data-view");
+    if (v) b.onclick = () => selectView(v);
+  });
+
+  // botón "Cerrar"
+  if (overlayClose) overlayClose.onclick = () => closeOverlay();
+
+  // cerrar al hacer click en el fondo borroso
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeOverlay();
+  });
+}
 // Formulario
 const form = document.getElementById("invForm");
 const fId = document.getElementById("f-id");
@@ -61,9 +104,9 @@ ths.forEach(th => {
 });
 
 btnChangeInv.addEventListener("click", () => {
-  const overlay = document.getElementById("overlayInventario");
-  overlay.classList.remove("hidden");
-  overlay.setAttribute("aria-hidden", "false");
+  buildOverlay();   // pinta los botones
+  wireOverlay();    // conecta sus clics
+  openOverlay();    // muestra la sábana
 });
 
 // Crear nuevo producto con el botón "Crear"
@@ -297,29 +340,21 @@ function updateKPIs(current) {
   kpiZero.textContent  = zero.toLocaleString();
 }
 
-// Si ya tengo vista guardada, oculto overlay y cargo.
-// Si no, muestro overlay y cargo después de seleccionar.
+// ===== Arranque del overlay =====
 if (overlay) {
+  buildOverlay();      // crea los botones dentro de #overlayButtons
+  wireOverlay();       // conecta los clics (selección, cerrar, fondo)
+
   const saved = localStorage.getItem("inventoryView");
   if (saved) {
-    overlay.classList.add("hidden");
-    // ya hay vista guardada: carga directo
-    loadData();
+    VIEW = saved;      // usa la vista guardada
+    closeOverlay();    // oculta la sábana
+    loadData();        // carga el inventario
   } else {
-    // aún no hay selección: esperar click
-    overlay.querySelectorAll(".overlay-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const v = btn.getAttribute("data-view") || "Grid view Normalizada";
-        VIEW = v;
-        localStorage.setItem("inventoryView", v);
-        overlay.classList.add("hidden");
-        setTimeout(() => loadData(), 200); // cargamos luego de la transición
-      });
-    });
+    openOverlay();     // muestra la sábana hasta que elijas
   }
 } else {
-  // si no hay overlay, carga normal
-  loadData();
+  loadData();          // por si no hubiera overlay en esta página
 }
 
 console.log("[inventario] Conectado a Netlify Function / Airtable");
