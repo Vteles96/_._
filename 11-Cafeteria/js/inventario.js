@@ -64,7 +64,7 @@ async function loadData() {
         id: r.id,
         Nombre: f.Producto || f.Nombre || "", // Producto = Nombre
         Marca: f.Marca || "",
-        TipoCantidad: f.TipoCantidad || f.Tipo || "",
+        TipoCantidad: f.Tipo_Cantidad || f.TipoCantidad || f.Tipo || "",
         Cantidad: typeof f.Cantidad === "number" ? f.Cantidad : Number(f.Cantidad ?? f.Quantidade) || 0,
         Unidad: f.Unidad || "",
         Categoria: f.Categoria || "",
