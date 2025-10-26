@@ -96,7 +96,7 @@ async function loadData() {
         Cantidad: typeof f.Cantidad === "number" ? f.Cantidad : Number(f.Cantidad ?? f.Quantidade) || 0,
         Unidad: f.Categoria || "",
         Categoria: f.Unidad || "",
-        Actualizado: f.UltimaActualizacion || f.Actualizado || r.createdTime || ""
+        Actualizado: f.Ultima_Actualizacion || f.Actualizado || r.createdTime || ""
       };
     });
     render();
@@ -113,9 +113,9 @@ function buildFieldsFromForm() {
     Marca: (fMarca.value || "").trim(),
     Tipo_Cantidad: (fTipo.value || "").trim(),
     Cantidad: fCantidad.value ? parseFloat(fCantidad.value) : 0,
-    Unidad: (fUnidad.value || "").trim(),
-    Categoria: (fCategoria.value || "").trim(),
-    UltimaActualizacion: new Date().toISOString()
+    Unidad: (fCategoria.value || "").trim(),
+    Categoria: (fUnidad.value || "").trim(),
+    Ultima_Actualizacion: new Date().toISOString()
   };
 }
 
