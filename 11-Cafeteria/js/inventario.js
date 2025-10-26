@@ -1,4 +1,4 @@
-// ===== Inventario: carga desde Netlify Function + Airtable =====
+document.addEventListener("DOMContentLoaded", () => {// ===== Inventario: carga desde Netlify Function + Airtable =====
 
 // Ajusta si tu tabla/vista en Airtable tienen otros nombres:
 const TABLE = "tblKLu27fgxF3QCBo";   // <-- pon aquí el nombre exacto de tu tabla
@@ -215,7 +215,25 @@ function render() {
         </tr>
       `;
     }).join("");
+    // 💡 Cargar datos al formulario al hacer clic en una fila
+    tbody.querySelectorAll("tr").forEach(tr => {
+      tr.addEventListener("click", () => {
+        const id = tr.getAttribute("data-id");
+        const row = state.rows.find(r => r.id === id);
+        if (!row) return;
 
+        fId.value = row.id;
+        fNombre.value = row.Nombre || "";
+        fMarca.value = row.Marca || "";
+        fTipo.value = (row.TipoCantidad || "").toLowerCase();
+        fCantidad.value = row.Cantidad ?? 0;
+        fUnidad.value = (row.Unidad || "").toLowerCase();
+        fCategoria.value = row.Categoria || "";
+        btnActualizar.disabled = false;
+        formMsg.textContent = "✏️ Editando registro seleccionado…";
+        // form.scrollIntoView({ behavior: "smooth", block: "start" }); // opcional
+      });
+    });
   total.textContent = `${filtered.length} ítems`;
 }
 
@@ -231,3 +249,5 @@ function formatDate(d) {
 loadData();
 
 console.log("[inventario] Conectado a Netlify Function / Airtable");
+
+});
