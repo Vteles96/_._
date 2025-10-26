@@ -25,6 +25,8 @@ const kpiItems = document.getElementById("kpiItems");
 const kpiStock = document.getElementById("kpiStock");
 const kpiBajo  = document.getElementById("kpiBajo");
 const kpiZero  = document.getElementById("kpiZero");
+const listZero = document.getElementById("listZero");
+const listLow  = document.getElementById("listLow");
 
 // Formulario
 const form = document.getElementById("invForm");
@@ -245,6 +247,7 @@ function render() {
 
   // 📊 actualizar las tarjetas KPI
   updateKPIs(filtered);   // 👈 ESTA ES LA LÍNEA NUEVA
+  updateCriticals(filtered); // 👈 Y ESTA OTRA
 }
 
 function escapeHtml(s) {
@@ -253,6 +256,23 @@ function escapeHtml(s) {
 function formatDate(d) {
   const t = new Date(d);
   return isNaN(t) ? String(d) : t.toLocaleString();
+}
+
+function updateCriticals(current) {
+  // current: el array filtrado que se está mostrando
+  const zero = current.filter(r => (Number(r.Cantidad) || 0) === 0);
+  const low  = current
+    .filter(r => (Number(r.Cantidad) || 0) <= 1 && (Number(r.Cantidad) || 0) > 0)
+    // opcional: ordenar por cantidad asc
+    .sort((a,b) => (Number(a.Cantidad)||0) - (Number(b.Cantidad)||0));
+
+  listZero.innerHTML = zero.length
+    ? zero.map(r => `<li><span class="name">${escapeHtml(r.Nombre)}</span><span class="qty">x${r.Cantidad}</span></li>`).join("")
+    : `<li><em>Sin alertas</em></li>`;
+
+  listLow.innerHTML = low.length
+    ? low.map(r => `<li><span class="name">${escapeHtml(r.Nombre)}</span><span class="qty">x${r.Cantidad}</span></li>`).join("")
+    : `<li><em>Todo OK</em></li>`;
 }
 
 function updateKPIs(current) {

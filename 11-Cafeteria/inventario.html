@@ -187,6 +187,48 @@
     @media (max-width: 900px) {
       .kpi-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
+        /* 🧯 Panel de críticos */
+    .criticos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .criticos-block {
+      background: #fff;
+      border: 1px solid #eadfd4;
+      border-radius: 1rem;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .criticos-block h3 {
+      margin: 0 0 .6rem 0;
+      font-size: 1.4rem;
+      color: #3b2d1f;
+    }
+    .criticos-zero { background: #ffecec; border-color: #ffc6c6; }
+    .criticos-low  { background: #fff7e6; border-color: #ffe3b3; }
+    .criticos-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 220px;
+      overflow: auto;
+    }
+    .criticos-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: .8rem;
+      padding: .5rem 0;
+      border-bottom: 1px dashed rgba(0,0,0,0.06);
+      font-size: 1.45rem;
+    }
+    .criticos-list li:last-child { border-bottom: 0; }
+    .criticos-list .name { font-weight: 600; color: #3b2d1f; }
+    .criticos-list .qty  { opacity: .8; }
+    @media (max-width: 900px) {
+      .criticos { grid-template-columns: 1fr; }
+    }
 
   </style>
 </head>
@@ -236,6 +278,17 @@
           <div class="kpi-value" id="kpiZero">—</div>
         </div>
       </div>
+      <!-- PANEL CRÍTICOS -->
+      <aside class="criticos">
+        <div class="criticos-block criticos-zero">
+          <h3>🔴 Sin stock</h3>
+          <ul id="listZero" class="criticos-list"></ul>
+        </div>
+        <div class="criticos-block criticos-low">
+          <h3>🟠 Bajo stock (≤1)</h3>
+          <ul id="listLow" class="criticos-list"></ul>
+        </div>
+      </aside>
       <div class="inventario-toolbar">
         <input id="q" type="search" placeholder="Buscar por nombre..." />
         <select id="tipo">
