@@ -20,6 +20,7 @@ const total = document.querySelector("#total");
 const qInput = document.querySelector("#q");
 const tipoSelect = document.querySelector("#tipo");
 const btnReload = document.querySelector("#btnReload");
+const btnChangeInv = document.getElementById("btnChangeInv");
 const ths = document.querySelectorAll("th[data-sort]");
 const kpiItems = document.getElementById("kpiItems");
 const kpiStock = document.getElementById("kpiStock");
@@ -57,6 +58,12 @@ ths.forEach(th => {
     else { state.sortBy = key; state.sortDir = "asc"; }
     render();
   });
+});
+
+btnChangeInv.addEventListener("click", () => {
+  const overlay = document.getElementById("overlayInventario");
+  overlay.classList.remove("hidden");
+  overlay.setAttribute("aria-hidden", "false");
 });
 
 // Crear nuevo producto con el botón "Crear"
