@@ -253,20 +253,17 @@
   </style>
 </head>
 <body class="bg-white">
-    <!-- OVERLAY SELECCIÓN INVENTARIO -->
+  <!-- 🌫️ OVERLAY SELECCIÓN INVENTARIO -->
   <div id="overlayInventario" class="overlay">
-    <div class="overlay-content">
-      <h2>Selecciona el inventario que deseas ver</h2>
-      <div class="overlay-buttons">
-        <!-- Opción actual (tu única vista) -->
-        <button class="overlay-btn" data-view="Grid view Normalizada">🍰 Cocina - Miminho</button>
-
-        <!-- Futuro: descomenta o duplica con otra vista/tabla
-        <button class="overlay-btn" data-view="Otra vista">🎂 Repostería</button>
-        -->
-      </div>
+    <div class="overlay-content" role="dialog" aria-modal="true"     aria-labelledby="ovTitle">
+      <h2 id="ovTitle">Selecciona el inventario que deseas ver</h2>
+      <div id="overlayButtons" class="overlay-buttons"><!-- JS genera aquí --></div>
+      <p style="margin-top:1rem;font-size:1.3rem;opacity:.8">Puedes cambiarlo cuando quieras con “Cambiar inventario”.</p>
+      <button id="overlayClose" class="overlay-btn" style="background:#777;">Cerrar</button>
     </div>
   </div>
+
+  
   <!-- HEADER: mismo look que tu sitio; reutilizo la clase de cabecera -->
   <header class="header header-menu">
     <div class="contenido-header contenedor">
@@ -336,6 +333,7 @@
           <option value="unid">Unid</option>
         </select>
         <button id="btnReload" type="button">Recargar</button>
+        <button id="btnChangeInv" type="button" title="Cambiar inventario">Cambiar inventario</button>
         <span id="total" class="badge">0 ítems</span>
       </div>
 
