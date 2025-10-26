@@ -35,6 +35,9 @@ const btnCrear = document.getElementById("btnCrear");
 const btnActualizar = document.getElementById("btnActualizar");
 const formMsg = document.getElementById("formMsg");
 
+// Exponer referencias del formulario al objeto global (solo para depurar)
+window.formElements = { fId, fNombre, fMarca, fTipo, fCantidad, fUnidad, fCategoria };
+
 // Eventos
 btnReload.addEventListener("click", loadData);
 qInput.addEventListener("input", (e) => { state.q = e.target.value.trim().toLowerCase(); render(); });
