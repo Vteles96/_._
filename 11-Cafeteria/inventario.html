@@ -152,6 +152,41 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+        /* 📊 KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .kpi {
+      background: #ffffff;
+      border: 1px solid #eadfd4;
+      border-radius: 1rem;
+      padding: 1.2rem 1.6rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .kpi-title {
+      font-size: 1.25rem;
+      color: #7a604b;
+      margin-bottom: .4rem;
+    }
+    .kpi-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #3b2d1f;
+    }
+    .kpi-warn {
+      background: #fff7e6;
+      border-color: #ffe3b3;
+    }
+    .kpi-alert {
+      background: #ffecec;
+      border-color: #ffc6c6;
+    }
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
 
   </style>
 </head>
@@ -182,6 +217,25 @@
 
   <main class="contenedor contenido-principal">
     <section class="inventario-wrap">
+            <!-- KPI CARDS -->
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="kpi-title">Ítems visibles</div>
+          <div class="kpi-value" id="kpiItems">—</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-title">Stock total</div>
+          <div class="kpi-value" id="kpiStock">—</div>
+        </div>
+        <div class="kpi kpi-warn">
+          <div class="kpi-title">Bajo stock (≤1)</div>
+          <div class="kpi-value" id="kpiBajo">—</div>
+        </div>
+        <div class="kpi kpi-alert">
+          <div class="kpi-title">Sin stock (=0)</div>
+          <div class="kpi-value" id="kpiZero">—</div>
+        </div>
+      </div>
       <div class="inventario-toolbar">
         <input id="q" type="search" placeholder="Buscar por nombre..." />
         <select id="tipo">
@@ -198,7 +252,7 @@
         <button id="btnReload" type="button">Recargar</button>
         <span id="total" class="badge">0 ítems</span>
       </div>
-      
+
       <!-- 🔹 FORMULARIO (va AQUÍ, justo debajo de la barra) -->
     <form id="invForm" style="margin-bottom:2rem;">
       <div style="display:grid;grid-template-columns: repeat(6, minmax(0,1fr)); gap:1rem;">

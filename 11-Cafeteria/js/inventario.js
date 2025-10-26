@@ -21,6 +21,10 @@ const qInput = document.querySelector("#q");
 const tipoSelect = document.querySelector("#tipo");
 const btnReload = document.querySelector("#btnReload");
 const ths = document.querySelectorAll("th[data-sort]");
+const kpiItems = document.getElementById("kpiItems");
+const kpiStock = document.getElementById("kpiStock");
+const kpiBajo  = document.getElementById("kpiBajo");
+const kpiZero  = document.getElementById("kpiZero");
 
 // Formulario
 const form = document.getElementById("invForm");
@@ -238,6 +242,9 @@ function render() {
       });
     });
   total.textContent = `${filtered.length} ítems`;
+
+  // 📊 actualizar las tarjetas KPI
+  updateKPIs(filtered);   // 👈 ESTA ES LA LÍNEA NUEVA
 }
 
 function escapeHtml(s) {
@@ -247,6 +254,20 @@ function formatDate(d) {
   const t = new Date(d);
   return isNaN(t) ? String(d) : t.toLocaleString();
 }
+
+function updateKPIs(current) {
+  // current = array ya filtrado/ordenado que se está mostrando en la tabla
+  const items = current.length;
+  const stock = current.reduce((sum, r) => sum + (Number(r.Cantidad) || 0), 0);
+  const bajo  = current.filter(r => (Number(r.Cantidad) || 0) <= 1 && (Number(r.Cantidad) || 0) > 0).length;
+  const zero  = current.filter(r => (Number(r.Cantidad) || 0) === 0).length;
+
+  kpiItems.textContent = items.toLocaleString();
+  kpiStock.textContent = stock.toLocaleString(undefined, { maximumFractionDigits: 1 });
+  kpiBajo.textContent  = bajo.toLocaleString();
+  kpiZero.textContent  = zero.toLocaleString();
+}
+
 
 // Carga inicial desde Airtable
 loadData();
