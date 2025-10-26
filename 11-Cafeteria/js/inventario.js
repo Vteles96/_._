@@ -315,9 +315,6 @@ if (overlay) {
   loadData();
 }
 
-// Carga inicial desde Airtable
-loadData();
-
 console.log("[inventario] Conectado a Netlify Function / Airtable");
 
 });
