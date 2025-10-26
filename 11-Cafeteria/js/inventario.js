@@ -12,6 +12,8 @@ const state = {
   tipo: ""
 };
 
+window.inventoryState = state;
+
 // DOM
 const tbody = document.querySelector("#tbody");
 const total = document.querySelector("#total");
