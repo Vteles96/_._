@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {// ===== Inventario: carga 
 
 // Ajusta si tu tabla/vista en Airtable tienen otros nombres:
 const TABLE = "tblKLu27fgxF3QCBo";   // <-- pon aquí el nombre exacto de tu tabla
-const VIEW  = "Grid view Normalizada";    // <-- o la vista que uses
+let VIEW = localStorage.getItem("inventoryView") || "Grid view Normalizada";    // <-- o la vista que uses
 
 const state = {
   rows: [],
@@ -27,6 +27,8 @@ const kpiBajo  = document.getElementById("kpiBajo");
 const kpiZero  = document.getElementById("kpiZero");
 const listZero = document.getElementById("listZero");
 const listLow  = document.getElementById("listLow");
+const overlay = document.getElementById("overlayInventario");
+
 
 // Formulario
 const form = document.getElementById("invForm");
@@ -288,6 +290,30 @@ function updateKPIs(current) {
   kpiZero.textContent  = zero.toLocaleString();
 }
 
+// Si ya tengo vista guardada, oculto overlay y cargo.
+// Si no, muestro overlay y cargo después de seleccionar.
+if (overlay) {
+  const saved = localStorage.getItem("inventoryView");
+  if (saved) {
+    overlay.classList.add("hidden");
+    // ya hay vista guardada: carga directo
+    loadData();
+  } else {
+    // aún no hay selección: esperar click
+    overlay.querySelectorAll(".overlay-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const v = btn.getAttribute("data-view") || "Grid view Normalizada";
+        VIEW = v;
+        localStorage.setItem("inventoryView", v);
+        overlay.classList.add("hidden");
+        setTimeout(() => loadData(), 200); // cargamos luego de la transición
+      });
+    });
+  }
+} else {
+  // si no hay overlay, carga normal
+  loadData();
+}
 
 // Carga inicial desde Airtable
 loadData();
