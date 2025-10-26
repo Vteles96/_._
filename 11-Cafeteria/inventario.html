@@ -198,6 +198,42 @@
         <button id="btnReload" type="button">Recargar</button>
         <span id="total" class="badge">0 ítems</span>
       </div>
+      
+      <!-- 🔹 FORMULARIO (va AQUÍ, justo debajo de la barra) -->
+    <form id="invForm" style="margin-bottom:2rem;">
+      <div style="display:grid;grid-template-columns: repeat(6, minmax(0,1fr)); gap:1rem;">
+        <input id="f-nombre"  type="text" placeholder="Producto *" required />
+        <input id="f-marca"   type="text" placeholder="Marca" />
+        <select id="f-tipo">
+          <option value="">Tipo</option>
+          <option value="caixa">Caixa</option>
+          <option value="embalagens">Embalagens</option>
+          <option value="frasco">Frasco</option>
+          <option value="garrafa">Garrafa</option>
+          <option value="lata">Lata</option>
+          <option value="saco">Saco</option>
+          <option value="saquinho">Saquinho</option>
+          <option value="unid">Unid</option>
+        </select>
+        <input id="f-cantidad" type="number" step="1" min="0" placeholder="Cantidad *" required />
+        <select id="f-unidad">
+          <option value="">Unidad</option>
+          <option value="kg">kg</option>
+          <option value="g">g</option>
+          <option value="l">l</option>
+          <option value="ml">ml</option>
+          <option value="u">u</option>
+        </select>
+        <input id="f-categoria" type="text" placeholder="Categoria" />
+      </div>
+
+      <div style="display:flex; gap:1rem; margin-top:1rem; align-items:center; flex-wrap:wrap;">
+        <button id="btnCrear" type="submit">Crear</button>
+        <button id="btnActualizar" type="button" disabled>Actualizar seleccionado</button>
+        <span id="formMsg" class="badge">Completa los campos y pulsa Crear</span>
+      </div>
+      <input id="f-id" type="hidden" />
+    </form>
 
       <div class="table-scroll">
         <table class="inventario-table" id="tabla">
