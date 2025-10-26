@@ -94,8 +94,8 @@ async function loadData() {
         Marca: f.Marca || "",
         TipoCantidad: f.Tipo_Cantidad || f.TipoCantidad || f.Tipo || "",
         Cantidad: typeof f.Cantidad === "number" ? f.Cantidad : Number(f.Cantidad ?? f.Quantidade) || 0,
-        Unidad: f.Unidad || "",
-        Categoria: f.Categoria || "",
+        Unidad: f.Categoria || "",
+        Categoria: f.Unidad || "",
         Actualizado: f.UltimaActualizacion || f.Actualizado || r.createdTime || ""
       };
     });
