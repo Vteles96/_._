@@ -48,6 +48,18 @@ ths.forEach(th => {
   });
 });
 
+// Crear nuevo producto con el botón "Crear"
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  createRecord();
+});
+
+// Actualizar producto seleccionado
+btnActualizar.addEventListener("click", (e) => {
+  e.preventDefault();
+  updateRecord();
+});
+
 // -------- Carga desde la Function --------
 async function loadData() {
   // 1) Trae todas las páginas de Airtable a través de la Function
@@ -187,13 +199,12 @@ function render() {
   });
 
     tbody.innerHTML = filtered.map(row => {
-      // Lógica de color según cantidad
       let rowClass = "";
-      if (row.Cantidad === 0) rowClass = "sin-stock";       // rojo
-      else if (row.Cantidad <= 1) rowClass = "bajo-stock";  // naranja
+      if (row.Cantidad === 0) rowClass = "sin-stock";
+      else if (row.Cantidad <= 1) rowClass = "bajo-stock";
     
       return `
-        <tr class="${rowClass}">
+        <tr class="${rowClass}" data-id="${row.id}">
           <td>${escapeHtml(row.Nombre)}</td>
           <td>${escapeHtml(row.Marca)}</td>
           <td>${escapeHtml(row.TipoCantidad)}</td>
