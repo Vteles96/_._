@@ -7,16 +7,100 @@
   <!-- Usa tu CSS ya compilado -->
   <link rel="stylesheet" href="build/css/app.css" />
   <style>
-    /* Pequeños estilos locales (no modifican tu app.css) */
-    .inventario-wrap { background:#fff; padding:2rem; margin: 5rem auto; max-width:120rem; width:95%; }
-    .inventario-toolbar { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; }
-    .inventario-toolbar input, .inventario-toolbar select, .inventario-toolbar button {
-      border:.3rem solid #5e311e; padding:.8rem 1rem; font-size:1.6rem;
+    /* 🎨 Estilo mejorado Inventario */
+    body {
+      background: #f8f6f2;
     }
-    .inventario-table { width:100%; border-collapse:collapse; background:#fff; }
-    .inventario-table th, .inventario-table td { border-bottom:1px solid #ddd; padding:1rem; text-align:left; }
-    .inventario-table th { cursor:pointer; user-select:none; }
-    .badge { display:inline-block; padding:.2rem .6rem; border-radius:.6rem; background:#ebe7de; }
+  
+    .inventario-wrap {
+      background: #ffffff;
+      padding: 3rem;
+      margin: 6rem auto;
+      max-width: 1600px;
+      width: 95%;
+      border-radius: 1.2rem;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+    }
+  
+    .inventario-toolbar {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+  
+    .inventario-toolbar input,
+    .inventario-toolbar select,
+    .inventario-toolbar button {
+      border: 2px solid #a3724c;
+      border-radius: .6rem;
+      padding: .8rem 1.2rem;
+      font-size: 1.6rem;
+      background-color: #fdfaf6;
+      color: #3b2d1f;
+    }
+  
+    .inventario-toolbar button {
+      background-color: #a3724c;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+  
+    .inventario-toolbar button:hover {
+      background-color: #5e311e;
+    }
+  
+    .inventario-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: 1.6rem;
+    }
+  
+    .inventario-table th {
+      background-color: #a3724c;
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05rem;
+      padding: 1.2rem;
+    }
+  
+    .inventario-table td {
+      border-bottom: 1px solid #e8e3db;
+      padding: 1.2rem;
+      color: #3b2d1f;
+    }
+  
+    .inventario-table tr:nth-child(even) {
+      background-color: #faf8f5;
+    }
+  
+    .inventario-table tr:hover {
+      background-color: #f3eae3;
+    }
+  
+    .badge {
+      display: inline-block;
+      padding: .4rem .8rem;
+      border-radius: .8rem;
+      background: #ebe7de;
+      color: #5e311e;
+      font-weight: 500;
+    }
+  
+    @media (max-width: 900px) {
+      .inventario-table th, .inventario-table td {
+        font-size: 1.4rem;
+        padding: .8rem;
+      }
+      .inventario-wrap {
+        padding: 2rem;
+      }
+    }
   </style>
 </head>
 <body class="bg-white">
