@@ -22,6 +22,19 @@ const tipoSelect = document.querySelector("#tipo");
 const btnReload = document.querySelector("#btnReload");
 const ths = document.querySelectorAll("th[data-sort]");
 
+// Formulario
+const form = document.getElementById("invForm");
+const fId = document.getElementById("f-id");
+const fNombre = document.getElementById("f-nombre");
+const fMarca = document.getElementById("f-marca");
+const fTipo = document.getElementById("f-tipo");
+const fCantidad = document.getElementById("f-cantidad");
+const fUnidad = document.getElementById("f-unidad");
+const fCategoria = document.getElementById("f-categoria");
+const btnCrear = document.getElementById("btnCrear");
+const btnActualizar = document.getElementById("btnActualizar");
+const formMsg = document.getElementById("formMsg");
+
 // Eventos
 btnReload.addEventListener("click", loadData);
 qInput.addEventListener("input", (e) => { state.q = e.target.value.trim().toLowerCase(); render(); });
@@ -71,12 +84,83 @@ async function loadData() {
         Actualizado: f.UltimaActualizacion || f.Actualizado || r.createdTime || ""
       };
     });
-
     render();
   } catch (err) {
     console.error(err);
     alert("Error cargando datos. Mira la consola para más detalle.");
   }
+}
+
+// 📦 Construir el objeto con los datos del formulario (fuera de loadData)
+function buildFieldsFromForm() {
+  return {
+    Producto: (fNombre.value || "").trim(),
+    Marca: (fMarca.value || "").trim(),
+    Tipo_Cantidad: (fTipo.value || "").trim(),
+    Cantidad: Number(fCantidad.value || 0),
+    Unidad: (fUnidad.value || "").trim(),
+    Categoria: (fCategoria.value || "").trim(),
+    UltimaActualizacion: new Date().toISOString()
+  };
+}
+
+// 🪄 Crear nuevo registro en Airtable
+async function createRecord() {
+  const fields = buildFieldsFromForm();
+  if (!fields.Producto || Number.isNaN(fields.Cantidad)) {
+    formMsg.textContent = "Completa Producto y Cantidad válidos.";
+    return;
+  }
+
+  formMsg.textContent = "Creando…";
+  const res = await fetch(`/.netlify/functions/airtable?table=${encodeURIComponent(TABLE)}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ record: fields })
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    console.error(data);
+    formMsg.textContent = "❌ Error creando registro";
+    return;
+  }
+
+  formMsg.textContent = "✅ Registro creado";
+  form.reset();
+  fId.value = "";
+  btnActualizar.disabled = true;
+  await loadData();
+}
+
+// ✏️ Actualizar registro existente en Airtable
+async function updateRecord() {
+  const id = fId.value;
+  if (!id) {
+    formMsg.textContent = "Selecciona una fila para actualizar.";
+    return;
+  }
+
+  const fields = buildFieldsFromForm();
+  formMsg.textContent = "Actualizando…";
+  const res = await fetch(`/.netlify/functions/airtable?table=${encodeURIComponent(TABLE)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, fields })
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    console.error(data);
+    formMsg.textContent = "❌ Error actualizando registro";
+    return;
+  }
+
+  formMsg.textContent = "✅ Registro actualizado";
+  form.reset();
+  fId.value = "";
+  btnActualizar.disabled = true;
+  await loadData();
 }
 
 // -------- Render de tabla/orden/filtros --------
