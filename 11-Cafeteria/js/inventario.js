@@ -102,17 +102,24 @@ function render() {
       : String(B).localeCompare(String(A));
   });
 
-  tbody.innerHTML = filtered.map(row => `
-    <tr>
-      <td>${escapeHtml(row.Nombre)}</td>
-      <td>${escapeHtml(row.Marca)}</td>
-      <td>${escapeHtml(row.TipoCantidad)}</td>
-      <td>${row.Cantidad}</td>
-      <td>${escapeHtml(row.Unidad)}</td>
-      <td>${escapeHtml(row.Categoria)}</td>
-      <td>${formatDate(row.Actualizado)}</td>
-    </tr>
-  `).join("");
+    tbody.innerHTML = filtered.map(row => {
+      // Lógica de color según cantidad
+      let rowClass = "";
+      if (row.Cantidad === 0) rowClass = "sin-stock";       // rojo
+      else if (row.Cantidad <= 1) rowClass = "bajo-stock";  // naranja
+    
+      return `
+        <tr class="${rowClass}">
+          <td>${escapeHtml(row.Nombre)}</td>
+          <td>${escapeHtml(row.Marca)}</td>
+          <td>${escapeHtml(row.TipoCantidad)}</td>
+          <td>${row.Cantidad}</td>
+          <td>${escapeHtml(row.Unidad)}</td>
+          <td>${escapeHtml(row.Categoria)}</td>
+          <td>${formatDate(row.Actualizado)}</td>
+        </tr>
+      `;
+    }).join("");
 
   total.textContent = `${filtered.length} ítems`;
 }
