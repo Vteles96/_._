@@ -112,7 +112,7 @@ function buildFieldsFromForm() {
     Producto: (fNombre.value || "").trim(),
     Marca: (fMarca.value || "").trim(),
     Tipo_Cantidad: (fTipo.value || "").trim(),
-    Cantidad: Number(fCantidad.value || 0),
+    Cantidad: fCantidad.value ? parseFloat(fCantidad.value) : 0,
     Unidad: (fUnidad.value || "").trim(),
     Categoria: (fCategoria.value || "").trim(),
     UltimaActualizacion: new Date().toISOString()
