@@ -31,6 +31,11 @@ const listLow  = document.getElementById("listLow");
 const overlay = document.getElementById("overlayInventario");
 const overlayButtons = document.getElementById("overlayButtons");
 const overlayClose   = document.getElementById("overlayClose");
+// 🔐 refs password overlay
+const overlayPass = document.getElementById("overlayPass");
+const pwForm   = document.getElementById("pwForm");
+const pwInput  = document.getElementById("pwInput");
+const pwMsg    = document.getElementById("pwMsg");
 
 function openOverlay() {
   overlay.classList.remove("hidden");
@@ -43,6 +48,34 @@ function closeOverlay() {
 function buildOverlay() {
   if (!overlayButtons) return;
   overlayButtons.innerHTML = "";
+
+// === PASSWORD overlay ===
+const INVENTORY_PASSWORD = "miminho2025"; // 🔑 cámbiala por la que quieras
+
+function openPass() {
+  overlayPass.classList.remove("hidden");
+  overlayPass.setAttribute("aria-hidden", "false");
+  pwMsg.style.display = "none";
+  pwInput.value = "";
+  pwInput.focus();
+}
+
+function closePass() {
+  overlayPass.classList.add("hidden");
+  overlayPass.setAttribute("aria-hidden", "true");
+}
+
+pwForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const val = pwInput.value.trim();
+  if (val === INVENTORY_PASSWORD) {
+    localStorage.setItem("inventoryAuth", "ok");
+    closePass();
+    openOverlay();     // muestra la sábana de selección
+  } else {
+    pwMsg.style.display = "block";
+  }
+});
 
   // botón para tu inventario actual (Miminho)
   const btn = document.createElement("button");
@@ -104,9 +137,14 @@ ths.forEach(th => {
 });
 
 btnChangeInv.addEventListener("click", () => {
-  buildOverlay();   // pinta los botones
-  wireOverlay();    // conecta sus clics
-  openOverlay();    // muestra la sábana
+  const auth = localStorage.getItem("inventoryAuth");
+  if (auth === "ok") {
+    buildOverlay();
+    wireOverlay();
+    openOverlay();
+  } else {
+    openPass(); // pide la contraseña primero
+  }
 });
 
 // Crear nuevo producto con el botón "Crear"
@@ -341,20 +379,30 @@ function updateKPIs(current) {
 }
 
 // ===== Arranque del overlay =====
+// ===== Arranque con verificación de contraseña =====
 if (overlay) {
-  buildOverlay();      // crea los botones dentro de #overlayButtons
-  wireOverlay();       // conecta los clics (selección, cerrar, fondo)
-
+  buildOverlay();
+  wireOverlay();
   const saved = localStorage.getItem("inventoryView");
+  const auth  = localStorage.getItem("inventoryAuth");
+
   if (saved) {
-    VIEW = saved;      // usa la vista guardada
-    closeOverlay();    // oculta la sábana
-    loadData();        // carga el inventario
+    VIEW = saved;
+    closeOverlay();
+    if (auth === "ok") {
+      loadData();        // ya autenticado → cargar
+    } else {
+      openPass();        // pide contraseña primero
+    }
   } else {
-    openOverlay();     // muestra la sábana hasta que elijas
+    if (auth === "ok") {
+      openOverlay();     // sin vista guardada, pero autenticado
+    } else {
+      openPass();        // sin vista guardada y sin auth → pedir pass
+    }
   }
 } else {
-  loadData();          // por si no hubiera overlay en esta página
+  loadData();            // por si no hubiera overlay en esta página
 }
 
 console.log("[inventario] Conectado a Netlify Function / Airtable");

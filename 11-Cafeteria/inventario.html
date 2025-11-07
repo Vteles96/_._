@@ -264,7 +264,20 @@
     </div>
   </div>
 
-  
+  <!-- 🔐 OVERLAY PASSWORD -->
+  <div id="overlayPass" class="overlay hidden" aria-hidden="true">
+    <div class="overlay-content" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+      <h2 id="pwTitle">Acceso inventario</h2>
+      <p style="margin:.5rem 0 1rem;opacity:.8">Introduce la contraseña para continuar.</p>
+      <form id="pwForm" style="display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center;">
+        <input id="pwInput" type="password" placeholder="Contraseña" autocomplete="current-password"
+              style="padding:.8rem 1rem; border:2px solid #a3724c; border-radius:.6rem; min-width:240px;">
+        <button id="pwSubmit" type="submit" class="overlay-btn">Entrar</button>
+      </form>
+      <p id="pwMsg" style="margin-top:1rem; color:#8b0000; font-weight:600; display:none;">Contraseña incorrecta</p>
+    </div>
+  </div>
+
   <!-- HEADER: mismo look que tu sitio; reutilizo la clase de cabecera -->
   <header class="header header-menu">
     <div class="contenido-header contenedor">
