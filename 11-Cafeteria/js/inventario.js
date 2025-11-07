@@ -45,10 +45,6 @@ function closeOverlay() {
   overlay.classList.add("hidden");
   overlay.setAttribute("aria-hidden", "true");
 }
-function buildOverlay() {
-  if (!overlayButtons) return;
-  overlayButtons.innerHTML = "";
-
 // === PASSWORD overlay ===
 const INVENTORY_PASSWORD = "miminho2025"; // 🔑 cámbiala por la que quieras
 
@@ -71,11 +67,18 @@ pwForm.addEventListener("submit", (e) => {
   if (val === INVENTORY_PASSWORD) {
     localStorage.setItem("inventoryAuth", "ok");
     closePass();
-    openOverlay();     // muestra la sábana de selección
+    openOverlay(); // muestra la sábana de selección
   } else {
     pwMsg.style.display = "block";
   }
 });
+
+window.openPass = openPass;
+
+function buildOverlay() {
+  if (!overlayButtons) return;
+  overlayButtons.innerHTML = "";
+
 
   // botón para tu inventario actual (Miminho)
   const btn = document.createElement("button");
@@ -379,7 +382,7 @@ function updateKPIs(current) {
 }
 
 // ===== Arranque del overlay =====
-// ===== Arranque con verificación de contraseña =====
+// =====  con verificación de contraseña =====
 if (overlay) {
   buildOverlay();
   wireOverlay();
